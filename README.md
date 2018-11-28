@@ -20,3 +20,7 @@ a phone number is a string of 10 digits
 
 To do this I will use: java + sparkjava + rest-assured + google-guice.
 You can fell free to use any other language and framework.
+
+
+
+# First step --> setup project and dependencies
