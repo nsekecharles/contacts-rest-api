@@ -1,0 +1,3 @@
+rootProject.name = 'contact-rest-api'
+include 'contact-core'
+
