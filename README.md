@@ -7,8 +7,8 @@ The goal of this exercise is to pratice TDD and build a 'clean' rest api.
 The contact rest api should have these end points:
 
 - register as a user
-- enable/disable sharing your contact list
 - add a contact to your contact list
+- enable/disable sharing your contact list
 - remove a contact form your contact list
 - display a contact information
 - display a contact's contacts when the contact accepts to share his contacts whith his contacts (you should not appear in your contact contacts list)

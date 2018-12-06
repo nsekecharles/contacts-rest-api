@@ -1,4 +1,4 @@
-package fr.contact.core.beans
+package fr.contact.core.entities
 
 class InvalidPhoneNumberException(message: String?) : RuntimeException(message) {
 

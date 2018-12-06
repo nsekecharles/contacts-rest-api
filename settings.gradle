@@ -1,3 +1,5 @@
 rootProject.name = 'contact-rest-api'
 include 'contact-core'
+include 'contact-delivery'
+include 'contact-usecases'
 

@@ -1,0 +1,36 @@
+buildscript {
+    ext.kotlin_version = '1.2.31'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+group 'contact-rest-api'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':contact-core')
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.jetbrains.spek:spek-api:1.1.5'
+    testRuntime 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
+    testImplementation 'org.amshove.kluent:kluent:1.44'
+    testImplementation "io.mockk:mockk:1.8.13"
+}
