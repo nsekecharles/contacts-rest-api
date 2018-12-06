@@ -3,32 +3,28 @@ package fr.contact.core.entities
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
-class PhoneNumberTest : Spek({
+class PhoneNumberTest {
 
-    given("0630560411 phone number") {
-        on("creating phone number") {
-            val validPhoneNumber = PhoneNumber("0630560411")
-            it("creates 0630560411 phone number") {
-                validPhoneNumber.number shouldEqual "0630560411"
-            }
-        }
+    @Test
+    internal fun `should create a phone number given a valid phone number`() {
+
+        val actual = PhoneNumber("0630560411")
+
+        actual.number shouldEqual "0630560411"
     }
 
-    given("invalid phone numbers") {
-        val invalidPhoneNumbers = listOf("04040404", "000Z000000", "ffffffffff", "aaaa")
-        invalidPhoneNumbers.forEach { value ->
-            on("creating $value phone number") {
-                val invalidPhoneNumberCreation = { PhoneNumber(value) }
-                val expectedErrorMessage = "$value is not a valid phone number"
-                it("throws $expectedErrorMessage") {
-                    invalidPhoneNumberCreation shouldThrow InvalidPhoneNumberException::class withMessage expectedErrorMessage
-                }
-            }
-        }
+    @ParameterizedTest(name = "{index} => try to create a phone number = {0}")
+    @ValueSource(strings = ["04040404", "000Z000000", "ffffffffff", "aaaa"])
+    internal fun `should throw InvalidPhoneNumberException given an invalid phone number`(invalidPhoneNumber: String) {
+
+        val invalidPhoneNumberCreation = { PhoneNumber(invalidPhoneNumber) }
+
+        val expectedErrorMessage = "$invalidPhoneNumber is not a valid phone number"
+
+        invalidPhoneNumberCreation shouldThrow InvalidPhoneNumberException::class withMessage expectedErrorMessage
     }
-})
+}
