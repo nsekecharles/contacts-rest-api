@@ -8,7 +8,7 @@ class CreateUserUseCase(private val userRepository: UserRepository) {
     fun execute(user: User) : User {
         when {
             userRepository.isUserPhoneNumberAvailable(user.mobilePhoneNumber) -> return userRepository.save(user)
-            else -> throw PhoneNumberAllreadyInUseException("$user.mobilePhoneNumber.number is allready used by another user")
+            else -> throw PhoneNumberAlreadyInUseException("$user.mobilePhoneNumber.number is already used by another user")
         }
     }
 
