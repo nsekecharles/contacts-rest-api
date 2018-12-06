@@ -47,21 +47,3 @@ class CreateUserUseCaseTest {
         VerifyNoFurtherInteractions on userRepository
     }
 }
-
-
-/**
-
-    given("A user") {
-        val mobilePhoneNumber = PhoneNumber("0812233211")
-
-        on("creating the user") {
-            val user = User("Charles", mobilePhoneNumber)
-            When calling userRepository.isUserPhoneNumberAvailable(mobilePhoneNumber) itReturns  true
-            When calling userRepository.save(user) itReturns user
-            sut.execute(user)
-            it("save the user") {
-                Verify on userRepository that userRepository.save(user) was called
-            }
-        }
-    }
-**/
