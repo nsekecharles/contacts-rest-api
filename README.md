@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/nsekecharles/contacts-rest-api.svg?branch=master)](https://travis-ci.com/nsekecharles/contacts-rest-api)
+
 # contacts-rest-api
 A simple rest api to manage contacts.
 
