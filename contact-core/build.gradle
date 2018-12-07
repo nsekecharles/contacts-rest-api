@@ -34,3 +34,12 @@ dependencies {
     testImplementation group: 'org.amshove.kluent', name: 'kluent', version: '1.44'
 
 }
+apply plugin: 'jacoco'
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport
