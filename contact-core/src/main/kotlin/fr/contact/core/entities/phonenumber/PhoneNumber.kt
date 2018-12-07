@@ -1,4 +1,4 @@
-package fr.contact.core.entities
+package fr.contact.core.entities.phonenumber
 
 data class PhoneNumber(val number: String) {
 

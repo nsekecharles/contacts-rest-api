@@ -1,7 +1,7 @@
 package fr.contact.usecases.user
 
-import fr.contact.core.entities.PhoneNumber
 import fr.contact.core.entities.User
+import fr.contact.core.entities.phonenumber.PhoneNumber
 
 class CreateUserUseCase(private val userRepository: UserRepository) {
 
@@ -14,7 +14,7 @@ class CreateUserUseCase(private val userRepository: UserRepository) {
     }
 
     interface UserRepository {
-        fun isUserPhoneNumberAvailable(phoneNumber: PhoneNumber) : Boolean
+        fun isUserPhoneNumberAvailable(phoneNumber: PhoneNumber): Boolean
         fun save(user: User)
     }
 }

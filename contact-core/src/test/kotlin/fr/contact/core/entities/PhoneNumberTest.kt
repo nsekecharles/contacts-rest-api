@@ -1,5 +1,7 @@
 package fr.contact.core.entities
 
+import fr.contact.core.entities.phonenumber.InvalidPhoneNumberException
+import fr.contact.core.entities.phonenumber.PhoneNumber
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage

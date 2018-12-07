@@ -1,13 +1,13 @@
 package fr.contact.usecases.user
 
-import fr.contact.core.entities.PhoneNumber
 import fr.contact.core.entities.User
-import fr.contact.usecases.gateways.UserRepository
+import fr.contact.core.entities.phonenumber.PhoneNumber
+import fr.contact.usecases.user.CreateUserUseCase.UserRepository
 import org.amshove.kluent.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class CreateUserUseCaseTest {
+internal class CreateUserUseCaseTest {
 
     private val validPhoneNumber = PhoneNumber("0812233211")
     private val user = User("Charles", validPhoneNumber)
@@ -37,10 +37,9 @@ class CreateUserUseCaseTest {
     internal fun `should throw phone number already in use exception given a phone number used by an other user`() {
 
         When calling userRepository.isUserPhoneNumberAvailable(validPhoneNumber) itReturns  false
+        val number = user.mobilePhoneNumber.number
 
         val creationOfUserWithUnavailablePhoneNumber = { sut.execute(user) }
-
-        val number = user.mobilePhoneNumber.number
         creationOfUserWithUnavailablePhoneNumber shouldThrow PhoneNumberAlreadyInUseException::class withMessage "$number is already used by another user"
 
         Verify on userRepository that userRepository.isUserPhoneNumberAvailable(validPhoneNumber) was called

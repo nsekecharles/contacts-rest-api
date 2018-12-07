@@ -1,7 +1,7 @@
 package fr.contact.delivery.rest.requests
 
 import com.beust.klaxon.Klaxon
-import fr.contact.core.entities.PhoneNumber
+import fr.contact.core.entities.phonenumber.PhoneNumber
 import fr.contact.core.entities.User
 import spark.Request
 
