@@ -9,7 +9,7 @@ class AddContactUseCase(private val userContactRepository: UserContactRepository
 
         if(userContactRepository.isContactInUserContacts(contactToAdd, user)) {
             val contactPhoneNumber = contactToAdd.mobilePhoneNumber.number
-            throw ContactAlreadyExists("$contactPhoneNumber, is already in user's contact list")
+            throw ContactAlreadyExistsException("$contactPhoneNumber, is already in user's contact list")
         }
 
         userContactRepository.addContact(user, contactToAdd)

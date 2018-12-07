@@ -37,7 +37,7 @@ internal class AddContactUseCaseTest {
         When calling userContactRepository.isContactInUserContacts(contactToAdd, user) itReturns true
 
         var addindContactExecution = {sut.execute(user, contactToAdd)}
-        addindContactExecution shouldThrow ContactAlreadyExists::class withMessage "$contactPhoneNumber, is already in user's contact list"
+        addindContactExecution shouldThrow ContactAlreadyExistsException::class withMessage "$contactPhoneNumber, is already in user's contact list"
 
         Verify on userContactRepository that userContactRepository.isContactInUserContacts(contactToAdd, user) was called
         VerifyNoFurtherInteractions on userContactRepository
