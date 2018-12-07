@@ -25,7 +25,6 @@ class CreateUserUseCaseTest {
     internal fun `should create a user given an available phone number`() {
 
         When calling userRepository.isUserPhoneNumberAvailable(validPhoneNumber) itReturns  true
-        When calling userRepository.save(user) itReturns user
 
         sut.execute(user)
 
@@ -41,7 +40,8 @@ class CreateUserUseCaseTest {
 
         val creationOfUserWithUnavailablePhoneNumber = { sut.execute(user) }
 
-        creationOfUserWithUnavailablePhoneNumber shouldThrow PhoneNumberAlreadyInUseException::class withMessage "$user.mobilePhoneNumber.number is already used by another user"
+        val number = user.mobilePhoneNumber.number
+        creationOfUserWithUnavailablePhoneNumber shouldThrow PhoneNumberAlreadyInUseException::class withMessage "$number is already used by another user"
 
         Verify on userRepository that userRepository.isUserPhoneNumberAvailable(validPhoneNumber) was called
         VerifyNoFurtherInteractions on userRepository
