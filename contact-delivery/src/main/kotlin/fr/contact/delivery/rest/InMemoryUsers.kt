@@ -24,7 +24,7 @@ class InMemoryUsers : UserRepository {
     }
 
     override fun isContactInUserContacts(contact: Contact, user: User): Boolean {
-        return contacts.get(user)?.any { contact.mobilePhoneNumber == contact.mobilePhoneNumber } ?: false
+        return contacts.get(user)?.any { c -> c.mobilePhoneNumber == contact.mobilePhoneNumber } ?: false
     }
 
 }
