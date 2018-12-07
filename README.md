@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/nsekecharles/contacts-rest-api.svg?branch=master)](https://travis-ci.com/nsekecharles/contacts-rest-api)
-
+[![codecov](https://codecov.io/gh/nsekecharles/contacts-rest-api/branch/master/graph/badge.svg)](https://codecov.io/gh/nsekecharles/contacts-rest-api)
 # contacts-rest-api
 A simple rest api to manage contacts.
 
