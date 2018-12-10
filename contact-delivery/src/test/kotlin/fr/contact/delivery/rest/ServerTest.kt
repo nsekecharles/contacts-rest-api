@@ -1,22 +1,22 @@
 package fr.contact.delivery.rest
 
 import io.restassured.RestAssured
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
 
 open class ServerTest {
 
-    private val server = Server(InMemoryUsers())
+    internal val server = Server(InMemoryUsers())
 
-    @BeforeEach
-    internal fun setUp() {
+    @BeforeAll
+    fun setUp() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 4490;
         server.start()
     }
 
-    @AfterEach
-    internal fun tearDown() {
-        server::stop
+    @AfterAll
+    fun tearDown() {
+        server.stop()
     }
 }
