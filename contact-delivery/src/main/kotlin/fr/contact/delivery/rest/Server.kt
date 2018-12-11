@@ -10,6 +10,7 @@ import fr.contact.usecases.user.ContactAlreadyExistsException
 import fr.contact.usecases.user.CreateUserUseCase
 import fr.contact.usecases.user.PhoneNumberAlreadyInUseException
 import spark.Spark
+import spark.kotlin.after
 import spark.kotlin.port
 import spark.kotlin.post
 
@@ -18,22 +19,20 @@ class Server(val userRepository: UserRepository) {
     fun start() {
         setupConfigurations()
         createUsersEndPoint()
-        addContactUseCase()
+        addContactEndPoint()
     }
 
-    private fun addContactUseCase() {
+    private fun addContactEndPoint() {
         var addContactUseCase = AddContactUseCase(userRepository)
         post("users/:userPhoneNumber") {
-           val userPhoneNumber = request.params(":userPhoneNumber")
+            val userPhoneNumber = request.params(":userPhoneNumber")
             val contactToAdd = AddContactRequest.fromRequest(request)!!.toContact()
             try {
                 addContactUseCase.execute(userRepository.getUser(userPhoneNumber), contactToAdd)
-                type("application/json")
                 status(201)
                 contactToAdd.toJson()
             } catch (e: ContactAlreadyExistsException) {
                 status(409)
-                type("application/json")
                 "there is already a contact with this phone number"
             }
         }
@@ -49,11 +48,9 @@ class Server(val userRepository: UserRepository) {
                 val user = CreateUserRequest.fromRequest(request)!!.toUser()
                 createUserUseCase.execute(user)
                 status(201)
-                type("application/json")
                 user.toJson()
             } catch (e: PhoneNumberAlreadyInUseException) {
                 status(409)
-                type("application/json")
                 "The phone number is already in use."
             }
 
@@ -62,6 +59,9 @@ class Server(val userRepository: UserRepository) {
 
     private fun setupConfigurations() {
         port(4490)
+        after {
+            type("application/json")
+        }
     }
 
     fun User.toJson() : String {
