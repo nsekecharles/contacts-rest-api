@@ -1,8 +1,8 @@
 package fr.contact.delivery.rest.requests
 
 import com.beust.klaxon.Klaxon
-import fr.contact.core.entities.phonenumber.PhoneNumber
 import fr.contact.core.entities.User
+import fr.contact.core.entities.phonenumber.PhoneNumber
 import spark.Request
 
 data class CreateUserRequest(val name: String, val phoneNumber: String) {
@@ -10,7 +10,7 @@ data class CreateUserRequest(val name: String, val phoneNumber: String) {
 }
 
 fun CreateUserRequest.toUser(): User {
-    return User(name, PhoneNumber(phoneNumber))
+    return User(name, PhoneNumber(phoneNumber), mutableListOf())
 }
 
 fun CreateUserRequest.Companion.fromRequest(request: Request) : CreateUserRequest? {

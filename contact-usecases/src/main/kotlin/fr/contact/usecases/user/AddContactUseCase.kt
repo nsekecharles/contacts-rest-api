@@ -7,7 +7,7 @@ class AddContactUseCase(private val userContactRepository: UserContactRepository
 
     fun execute(user: User, contactToAdd: Contact) {
 
-        if(userContactRepository.isContactInUserContacts(contactToAdd, user)) {
+        if(user.hasContact(contactToAdd)) {
             val contactPhoneNumber = contactToAdd.mobilePhoneNumber.number
             throw ContactAlreadyExistsException("$contactPhoneNumber, is already in user's contact list")
         }
@@ -18,6 +18,5 @@ class AddContactUseCase(private val userContactRepository: UserContactRepository
 
     interface UserContactRepository {
         fun addContact(user: User, contact: Contact)
-        fun isContactInUserContacts(contact: Contact, user: User): Boolean
     }
 }

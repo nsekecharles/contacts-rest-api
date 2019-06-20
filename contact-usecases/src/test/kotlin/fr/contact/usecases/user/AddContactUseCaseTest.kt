@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test
 
 internal class AddContactUseCaseTest {
 
-    private val user = User("Charles", PhoneNumber("0223322111"))
-    private val contactToAdd = Contact("Andre", PhoneNumber("0321222022"))
+    private val user = User("Charles", PhoneNumber("0223322111"), mutableListOf(Contact("Andre 1", PhoneNumber("0321222021"))))
+    private val contactToAdd = Contact("Andre 2", PhoneNumber("0321222022"))
 
     private lateinit var sut: AddContactUseCase
     private lateinit var userContactRepository: UserContactRepository
@@ -33,13 +33,10 @@ internal class AddContactUseCaseTest {
     @Test
     internal fun `should  throw contact already exist giving a contact phone number in contacts`() {
 
-        val contactPhoneNumber = contactToAdd.mobilePhoneNumber.number
-        When calling userContactRepository.isContactInUserContacts(contactToAdd, user) itReturns true
+        val existingContact = Contact("Andre 1", PhoneNumber("0321222021"))
+        var addindContactExecution = { sut.execute(user, existingContact) }
+        addindContactExecution shouldThrow ContactAlreadyExistsException::class withMessage "${existingContact.mobilePhoneNumber.number}, is already in user's contact list"
 
-        var addindContactExecution = {sut.execute(user, contactToAdd)}
-        addindContactExecution shouldThrow ContactAlreadyExistsException::class withMessage "$contactPhoneNumber, is already in user's contact list"
-
-        Verify on userContactRepository that userContactRepository.isContactInUserContacts(contactToAdd, user) was called
         VerifyNoFurtherInteractions on userContactRepository
     }
 }

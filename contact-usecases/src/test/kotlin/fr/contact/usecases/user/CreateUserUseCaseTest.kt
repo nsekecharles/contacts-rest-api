@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 internal class CreateUserUseCaseTest {
 
     private val validPhoneNumber = PhoneNumber("0812233211")
-    private val user = User("Charles", validPhoneNumber)
+    private val user = User("Charles", validPhoneNumber, mutableListOf())
 
     private lateinit var userRepository: UserRepository
     private lateinit var sut: CreateUserUseCase

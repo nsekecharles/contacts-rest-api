@@ -5,5 +5,5 @@ import fr.contact.usecases.user.AddContactUseCase
 import fr.contact.usecases.user.CreateUserUseCase
 
 interface UserRepository:CreateUserUseCase.UserRepository, AddContactUseCase.UserContactRepository {
-    fun getUser(phoneNumber: String): User
+    fun getUserByPhoneNumber(phoneNumber: String): User
 }

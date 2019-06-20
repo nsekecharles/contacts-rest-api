@@ -28,7 +28,7 @@ class Server(val userRepository: UserRepository) {
             val userPhoneNumber = request.params(":userPhoneNumber")
             val contactToAdd = AddContactRequest.fromRequest(request)!!.toContact()
             try {
-                addContactUseCase.execute(userRepository.getUser(userPhoneNumber), contactToAdd)
+                addContactUseCase.execute(userRepository.getUserByPhoneNumber(userPhoneNumber), contactToAdd)
                 status(201)
                 contactToAdd.toJson()
             } catch (e: ContactAlreadyExistsException) {
